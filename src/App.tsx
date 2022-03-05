@@ -1,7 +1,15 @@
-import React from "react";
+import { MainRouter } from "./routers/MainRouter";
+
+const AppState = ({ children }: any) => {
+  return <>{children}</>;
+};
 
 export const App = () => {
-  return <div></div>;
+  return (
+    <AppState>
+      <MainRouter />
+    </AppState>
+  );
 };
 
 export default App;
