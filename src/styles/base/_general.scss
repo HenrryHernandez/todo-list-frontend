@@ -1,0 +1,26 @@
+hr {
+  width: 50%;
+  height: 1px;
+  margin: 5px 0;
+  border-width: 0px;
+  background-color: #fff;
+}
+
+.btn {
+  width: 100%;
+  text-align: center;
+  border-radius: 4px;
+  padding: 10px;
+  text-decoration: none;
+  color: #fff;
+  background-color: $deep-blue;
+
+  &:hover {
+    background-color: darken($deep-blue, 5px);
+    cursor: pointer;
+  }
+
+  &:active {
+    background-color: $deep-blue;
+  }
+}
