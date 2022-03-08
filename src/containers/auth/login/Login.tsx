@@ -35,7 +35,7 @@ export const Login = () => {
 
         <hr />
 
-        <Link className="btn auth__link" to="/auth/register">
+        <Link className="btn auth__link" to="/auth/register" replace>
           Create new
         </Link>
       </div>

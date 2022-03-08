@@ -54,7 +54,7 @@ export const Register = () => {
 
         <hr />
 
-        <Link className="btn auth__link" to="/auth/login">
+        <Link className="btn auth__link" to="/auth/login" replace>
           Already have one
         </Link>
       </div>
