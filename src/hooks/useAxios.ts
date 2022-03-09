@@ -27,7 +27,7 @@ export const useAxios = () => {
         const config = error?.config;
         const response = error?.response;
 
-        if (response?.status === 403) {
+        if (response?.status === 401 || response?.status === 403) {
           console.log("logout");
         }
 
