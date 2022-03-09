@@ -10,7 +10,7 @@ import { Dashboard } from "../containers/dashboard/Dashboard";
 import { TokenContext } from "../contexts/TokenContext";
 
 export const MainRouter = () => {
-  const { token } = useContext(TokenContext);
+  const { token, setToken } = useContext(TokenContext);
 
   const [thereIsToken, setThereIsToken] = useState(false);
   const [confirmingToken, setConfirmingToken] = useState(true);
@@ -21,6 +21,8 @@ export const MainRouter = () => {
 
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
+
+    setToken(accessToken);
     setThereIsToken(accessToken !== null);
     setConfirmingToken(false);
   }, []);
