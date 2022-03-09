@@ -1,7 +1,9 @@
+import { UserProvider } from "./contexts/UserContext";
+
 import { MainRouter } from "./routers/MainRouter";
 
 const AppState = ({ children }: any) => {
-  return <>{children}</>;
+  return <UserProvider>{children}</UserProvider>;
 };
 
 export const App = () => {
