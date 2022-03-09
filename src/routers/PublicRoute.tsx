@@ -1,5 +1,5 @@
-import { Navigate, Outlet, Route } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 
 export const PublicRouter = ({ allowNavigation }: any) => {
-  return allowNavigation ? <Outlet /> : <Navigate to="/" />;
+  return allowNavigation ? <Outlet /> : <Navigate to="/" replace />;
 };
