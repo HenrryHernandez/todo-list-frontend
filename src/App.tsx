@@ -1,3 +1,4 @@
+import { TodosProvider } from "./contexts/TodosContext";
 import { TokenProvider } from "./contexts/TokenContext";
 import { UserProvider } from "./contexts/UserContext";
 
@@ -6,7 +7,9 @@ import { MainRouter } from "./routers/MainRouter";
 const AppState = ({ children }: any) => {
   return (
     <TokenProvider>
-      <UserProvider>{children}</UserProvider>
+      <UserProvider>
+        <TodosProvider>{children}</TodosProvider>
+      </UserProvider>
     </TokenProvider>
   );
 };
