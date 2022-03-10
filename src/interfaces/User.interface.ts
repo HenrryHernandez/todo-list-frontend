@@ -15,6 +15,13 @@ export interface In_CreateUserResponse {
   msg: string;
 }
 
+export interface In_GetBasicUserInfoResponse {
+  ok: boolean;
+  msg: string;
+  user: In_BasicUserInfo;
+  token: string;
+}
+
 export interface Out_CreateUserInfo {
   name: string;
   lastname1: string;
