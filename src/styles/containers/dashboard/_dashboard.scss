@@ -1,0 +1,34 @@
+.dashboard {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  grid-template-rows: 50px 1fr 100px;
+  gap: 1px;
+}
+
+.dashboard__title {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  background-color: $tertiary-colorie;
+
+  h2 {
+    color: #fff;
+    margin-left: 20px;
+  }
+}
+
+.dashboard__todos {
+  grid-row: 2 / -1;
+  overflow: scroll;
+}
+
+.dashboard__todo {
+  background-color: grey;
+}
+
+.dashboard__options {
+  background-color: grey;
+  grid-row: 3 / 4;
+}

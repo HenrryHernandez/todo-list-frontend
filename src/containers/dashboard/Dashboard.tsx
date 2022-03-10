@@ -1,16 +1,21 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { TodoCard } from "../../components/TodoCard";
+
 import { TokenContext } from "../../contexts/TokenContext";
+import { TodosContext } from "../../contexts/TodosContext";
 import { UserContext } from "../../contexts/UserContext";
 
 import { useAxios } from "../../hooks/useAxios";
 
+import { In_GetTodosResponse } from "../../interfaces/Todo.interface";
 import { In_GetBasicUserInfoResponse } from "../../interfaces/User.interface";
 
 export const Dashboard = () => {
   const { setToken } = useContext(TokenContext);
-  const { name, lastname1, saveUser } = useContext(UserContext);
+  const { username, saveUser } = useContext(UserContext);
+  const { todos, setTodos, currentTodo } = useContext(TodosContext);
 
   const axiosInstance = useAxios();
   const navigate = useNavigate();
@@ -27,8 +32,17 @@ export const Dashboard = () => {
     setIsLoading(false);
   };
 
+  const getTodos = async () => {
+    const response = await axiosInstance.get<In_GetTodosResponse>(
+      "/api/todos/get"
+    );
+
+    setTodos(response.data.todos);
+  };
+
   useEffect(() => {
     getUser();
+    getTodos();
   }, []);
 
   const logout = () => {
@@ -40,20 +54,25 @@ export const Dashboard = () => {
   };
 
   return (
-    <>
-      <p>Dashboard</p>
-      <button onClick={logout}>Logout</button>
-
-      {isLoading ? (
-        <div>
-          <p>Loading...</p>
-        </div>
-      ) : (
-        <div>
-          <p>{name}</p>
-          <p>{lastname1}</p>
-        </div>
-      )}
-    </>
+    <div className="dashboard">
+      <div className="dashboard__title">
+        <button onClick={logout}>Logout</button>
+        <h2>{username}</h2>
+      </div>
+      <div className="dashboard__todos">
+        {todos.map((el) => (
+          <TodoCard
+            key={el.id}
+            id={el.id}
+            title={el.title}
+            description={el.description}
+          ></TodoCard>
+        ))}
+      </div>
+      <div className="dashboard__todo">
+        <h2>{currentTodo?.title}</h2> <p>{currentTodo?.description}</p>
+      </div>
+      <div className="dashboard__options">options</div>
+    </div>
   );
 };
