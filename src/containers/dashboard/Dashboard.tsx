@@ -15,7 +15,8 @@ import { In_GetBasicUserInfoResponse } from "../../interfaces/User.interface";
 export const Dashboard = () => {
   const { setToken } = useContext(TokenContext);
   const { username, saveUser } = useContext(UserContext);
-  const { todos, setTodos, currentTodo } = useContext(TodosContext);
+  const { todos, setTodos, currentTodo, cleanTodos, cleanCurrentTodo } =
+    useContext(TodosContext);
 
   const axiosInstance = useAxios();
   const navigate = useNavigate();
@@ -51,6 +52,9 @@ export const Dashboard = () => {
     navigate("/auth/login");
 
     setToken(null);
+
+    cleanTodos();
+    cleanCurrentTodo();
   };
 
   return (

@@ -8,6 +8,8 @@ type TodosContextProps = {
   currentTodo: ITodo | null;
   setCurrentTodo: React.Dispatch<React.SetStateAction<ITodo | null>>;
   selectTodoById: (todoId: number) => void;
+  cleanTodos: () => void;
+  cleanCurrentTodo: () => void;
 };
 
 export const TodosContext = createContext({} as TodosContextProps);
@@ -20,9 +22,25 @@ export const TodosProvider = ({ children }: any) => {
     setCurrentTodo(todos.find((el) => el.id === todoId) ?? null);
   };
 
+  const cleanTodos = () => {
+    setTodos([]);
+  };
+
+  const cleanCurrentTodo = () => {
+    setCurrentTodo(null);
+  };
+
   return (
     <TodosContext.Provider
-      value={{ todos, setTodos, currentTodo, setCurrentTodo, selectTodoById }}
+      value={{
+        todos,
+        setTodos,
+        currentTodo,
+        setCurrentTodo,
+        selectTodoById,
+        cleanTodos,
+        cleanCurrentTodo,
+      }}
     >
       {children}
     </TodosContext.Provider>
