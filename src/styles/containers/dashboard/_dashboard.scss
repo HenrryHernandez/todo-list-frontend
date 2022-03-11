@@ -22,6 +22,11 @@
 .dashboard__todos {
   grid-row: 2 / -1;
   overflow: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  background-color: $tertiary-colorie;
 }
 
 .dashboard__todo {
