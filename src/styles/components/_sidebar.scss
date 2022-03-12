@@ -16,14 +16,6 @@
   right: 0;
 }
 
-#sidebar ul li {
-  padding: 15px 10px;
-  border-bottom: 1px solid #fff;
-  color: #fff;
-  text-align: center;
-  list-style: none;
-}
-
 .sidebar__toggle_button {
   position: absolute;
   right: 210px;
@@ -40,6 +32,14 @@
   }
 }
 
+.sidebar__item {
+  padding: 15px 10px;
+  border-bottom: 1px solid #fff;
+  color: #fff;
+  text-align: center;
+  list-style: none;
+}
+
 .sidebar__profile_section {
   img {
     width: 150px;
@@ -48,5 +48,18 @@
 
   p {
     font-size: 14px;
+  }
+}
+
+.sidebar__item-button {
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $secondary-colorie;
   }
 }

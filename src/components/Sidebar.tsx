@@ -6,6 +6,7 @@ import { UserContext } from "../contexts/UserContext";
 
 export const Sidebar = () => {
   const { name, lastname1 } = useContext(UserContext);
+
   const currRef = useRef(null);
 
   useEffect(() => {
@@ -26,7 +27,7 @@ export const Sidebar = () => {
       </div>
 
       <ul>
-        <li>
+        <li className="sidebar__item">
           <div className="sidebar__profile_section">
             <img src={NoProfilePicture} alt="no_profile_picture" />
             <p>
@@ -34,8 +35,8 @@ export const Sidebar = () => {
             </p>
           </div>
         </li>
-        <li>Settings</li>
-        <li>Logout</li>
+        <li className="sidebar__item sidebar__item-button">Settings</li>
+        <li className="sidebar__item sidebar__item-button">Logout</li>
       </ul>
     </div>
   );
