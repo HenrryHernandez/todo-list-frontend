@@ -1,9 +1,9 @@
-import { Routes, Route } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
-import { Login } from "./login/Login";
-import { Register } from "./register/Register";
+import { Login } from "../containers/auth/login/Login";
+import { Register } from "../containers/auth/register/Register";
 
-export const AuthRouter = () => {
+export const PublicRouter = () => {
   return (
     <Routes>
       <Route path="/login" element={<Login />}></Route>
