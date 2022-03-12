@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import { PrivateRouter } from "./PrivateRoute";
-import { PublicRouter } from "./PublicRoute";
+import { PrivateRouteValidator } from "./PrivateRouteValidator";
+import { PublicRouteValidator } from "./PublicRouteValidator";
 
 import { AuthRouter } from "../containers/auth/AuthRouter";
 import { Dashboard } from "../containers/dashboard/Dashboard";
@@ -32,10 +32,14 @@ export const MainRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<PrivateRouter allowNavigation={thereIsToken} />}>
+        <Route
+          element={<PrivateRouteValidator allowNavigation={thereIsToken} />}
+        >
           <Route path="/" element={<Dashboard />}></Route>
         </Route>
-        <Route element={<PublicRouter allowNavigation={!thereIsToken} />}>
+        <Route
+          element={<PublicRouteValidator allowNavigation={!thereIsToken} />}
+        >
           <Route path="/auth/*" element={<AuthRouter />}></Route>
         </Route>
 
