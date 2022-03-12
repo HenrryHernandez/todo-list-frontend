@@ -20,17 +20,24 @@ export const TodoCard = ({ id, title, description }: Props) => {
   };
 
   return (
-    <div
-      className="todo_card"
-      onClick={() => {
-        selectTodoById(id);
-      }}
-    >
+    <div className="todo_card">
       <div className="todo_card__title">
         <h5>{title}</h5>
       </div>
-      <div className="todo_card__description">
-        <p>{getFormattedDescription()}</p>
+      <div className="todo_card__body">
+        <div
+          className="todo_card__description"
+          onClick={() => {
+            selectTodoById(id);
+          }}
+        >
+          <p>{getFormattedDescription()}</p>
+        </div>
+        <div className="todo_card__button">
+          <button className="btn">
+            <i className="fa fa-trash"></i>
+          </button>
+        </div>
       </div>
     </div>
   );

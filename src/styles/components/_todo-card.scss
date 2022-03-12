@@ -18,7 +18,7 @@
   border-top-right-radius: 5px;
 }
 
-.todo_card__description {
+.todo_card__body {
   height: 60%;
   display: flex;
   align-items: center;
@@ -29,5 +29,32 @@
 
   &:hover {
     background-color: lighten($primary-colorie, 45px);
+  }
+}
+
+.todo_card__description {
+  width: 80%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.todo_card__button {
+  width: 20%;
+  height: 100%;
+
+  button {
+    width: 100%;
+    height: 100%;
+    background-color: red;
+
+    &:hover {
+      background-color: darken(red, 10px);
+    }
+
+    &:active {
+      background-color: red;
+    }
   }
 }
