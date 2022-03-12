@@ -1,27 +1,22 @@
-import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useContext, useEffect } from "react";
 
 import { TodoCard } from "../../components/TodoCard";
 
-import { TokenContext } from "../../contexts/TokenContext";
 import { TodosContext } from "../../contexts/TodosContext";
 import { UserContext } from "../../contexts/UserContext";
 
 import { useAxios } from "../../hooks/useAxios";
+import { useLogout } from "../../hooks/useLogout";
 
 import { In_GetTodosResponse } from "../../interfaces/Todo.interface";
 import { In_GetBasicUserInfoResponse } from "../../interfaces/User.interface";
 
 export const Dashboard = () => {
-  const { setToken } = useContext(TokenContext);
   const { username, saveUser } = useContext(UserContext);
-  const { todos, setTodos, currentTodo, cleanTodos, cleanCurrentTodo } =
-    useContext(TodosContext);
+  const { todos, setTodos, currentTodo } = useContext(TodosContext);
+  const { logout } = useLogout();
 
   const axiosInstance = useAxios();
-  const navigate = useNavigate();
-
-  const [isLoading, setIsLoading] = useState(true);
 
   const getUser = async () => {
     const response = await axiosInstance.get<In_GetBasicUserInfoResponse>(
@@ -29,8 +24,6 @@ export const Dashboard = () => {
     );
 
     saveUser(response.data.user);
-
-    setIsLoading(false);
   };
 
   const getTodos = async () => {
@@ -45,17 +38,6 @@ export const Dashboard = () => {
     getUser();
     getTodos();
   }, []);
-
-  const logout = () => {
-    localStorage.removeItem("accessToken");
-
-    navigate("/auth/login");
-
-    setToken(null);
-
-    cleanTodos();
-    cleanCurrentTodo();
-  };
 
   return (
     <div className="dashboard">
