@@ -6,7 +6,6 @@ import { TodosContext } from "../../contexts/TodosContext";
 import { UserContext } from "../../contexts/UserContext";
 
 import { useAxios } from "../../hooks/useAxios";
-import { useLogout } from "../../hooks/useLogout";
 
 import { In_GetTodosResponse } from "../../interfaces/Todo.interface";
 import { In_GetBasicUserInfoResponse } from "../../interfaces/User.interface";
@@ -14,7 +13,6 @@ import { In_GetBasicUserInfoResponse } from "../../interfaces/User.interface";
 export const Dashboard = () => {
   const { username, saveUser } = useContext(UserContext);
   const { todos, setTodos, currentTodo } = useContext(TodosContext);
-  const { logout } = useLogout();
 
   const axiosInstance = useAxios();
 
@@ -42,7 +40,6 @@ export const Dashboard = () => {
   return (
     <div className="dashboard">
       <div className="dashboard__title">
-        <button onClick={logout}>Logout</button>
         <h2>{username}</h2>
       </div>
       <div className="dashboard__todos">

@@ -4,8 +4,12 @@ import NoProfilePicture from "../assets/no_profile_picture.png";
 
 import { UserContext } from "../contexts/UserContext";
 
+import { useLogout } from "../hooks/useLogout";
+
 export const Sidebar = () => {
   const { name, lastname1 } = useContext(UserContext);
+
+  const { logout } = useLogout();
 
   const currRef = useRef(null);
 
@@ -36,7 +40,9 @@ export const Sidebar = () => {
           </div>
         </li>
         <li className="sidebar__item sidebar__item-button">Settings</li>
-        <li className="sidebar__item sidebar__item-button">Logout</li>
+        <li className="sidebar__item sidebar__item-button" onClick={logout}>
+          Logout
+        </li>
       </ul>
     </div>
   );
