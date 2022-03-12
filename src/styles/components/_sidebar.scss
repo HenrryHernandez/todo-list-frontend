@@ -1,0 +1,52 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+#sidebar {
+  width: 200px;
+  height: 100%;
+  position: fixed;
+  right: -200px;
+  background-color: $tertiary-colorie;
+  transition: all 500ms;
+}
+
+#sidebar.active {
+  right: 0;
+}
+
+#sidebar ul li {
+  padding: 15px 10px;
+  border-bottom: 1px solid #fff;
+  color: #fff;
+  text-align: center;
+  list-style: none;
+}
+
+.sidebar__toggle_button {
+  position: absolute;
+  right: 210px;
+  top: 5px;
+  cursor: pointer;
+
+  span {
+    width: 40px;
+    display: block;
+    text-align: center;
+    font-size: 30px;
+    border: 1px solid #fff;
+    color: #fff;
+  }
+}
+
+.sidebar__profile_section {
+  img {
+    width: 150px;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 14px;
+  }
+}
