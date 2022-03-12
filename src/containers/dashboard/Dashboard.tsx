@@ -1,4 +1,5 @@
 import { useContext, useEffect } from "react";
+import { CurrentTodoView } from "../../components/CurrentTodoView";
 
 import { TodoCard } from "../../components/TodoCard";
 
@@ -53,7 +54,7 @@ export const Dashboard = () => {
         ))}
       </div>
       <div className="dashboard__todo">
-        <h2>{currentTodo?.title}</h2> <p>{currentTodo?.description}</p>
+        <CurrentTodoView />
       </div>
       <div className="dashboard__options">options</div>
     </div>
