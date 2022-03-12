@@ -18,7 +18,6 @@ export const Sidebar = () => {
 
     toggleButton?.addEventListener("click", () => {
       const sidebar = document.getElementById("sidebar");
-      console.log(sidebar);
 
       sidebar?.classList.toggle("active");
     });
