@@ -27,6 +27,10 @@
   align-items: center;
   padding: 10px;
   background-color: $tertiary-colorie;
+
+  button {
+    margin-bottom: 10px;
+  }
 }
 
 .dashboard__todo {
