@@ -3,12 +3,21 @@ import { useContext } from "react";
 import { TodosContext } from "../contexts/TodosContext";
 
 export const CurrentTodoView = () => {
-  const { currentTodo } = useContext(TodosContext);
+  const { currentTodo, title, setTitle, description, setDescription } =
+    useContext(TodosContext);
 
   return (
     <div className="current_todo_view">
       <div className="current_todo_view__information">
-        <h2>{currentTodo?.title}</h2> <p>{currentTodo?.description}</p>
+        <input
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        <textarea
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        ></textarea>
       </div>
 
       <div className="current_todo_view__images">
