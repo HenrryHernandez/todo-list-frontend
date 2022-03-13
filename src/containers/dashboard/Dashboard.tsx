@@ -6,9 +6,23 @@ import { TodoCard } from "../../components/TodoCard";
 import { TodosContext } from "../../contexts/TodosContext";
 import { UserContext } from "../../contexts/UserContext";
 
+import { useTodos } from "../../hooks/useTodos";
+
 export const Dashboard = () => {
   const { username } = useContext(UserContext);
-  const { todos } = useContext(TodosContext);
+  const { todos, addNewTodoToList } = useContext(TodosContext);
+
+  const { postNewTodo } = useTodos();
+
+  const createTodo = async () => {
+    const resp = await postNewTodo({ title: "", description: "" });
+
+    if (!resp) {
+      alert("no posted todo.");
+    } else {
+      addNewTodoToList(resp.todo);
+    }
+  };
 
   return (
     <div className="dashboard">
@@ -16,6 +30,9 @@ export const Dashboard = () => {
         <h2>{username}</h2>
       </div>
       <div className="dashboard__todos">
+        <button className="btn" onClick={createTodo}>
+          Add new
+        </button>
         {todos.map((el) => (
           <TodoCard
             key={el.id}
