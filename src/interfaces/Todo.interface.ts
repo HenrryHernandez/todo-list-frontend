@@ -4,6 +4,12 @@ export interface In_GetTodosResponse {
   todos: ITodo[];
 }
 
+export interface In_CreateTodoResponse {
+  ok: boolean;
+  msg: string;
+  todo: ITodo;
+}
+
 export interface ITodo {
   id: number;
   title: string;
@@ -14,4 +20,9 @@ export interface ITodo {
 export interface IImage {
   id: number;
   imageName: string;
+}
+
+export interface Out_CreateTodo {
+  title: string;
+  description: string;
 }
