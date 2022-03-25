@@ -8,11 +8,14 @@ type TodosContextProps = {
   currentTodo: ITodo | null;
   setCurrentTodo: React.Dispatch<React.SetStateAction<ITodo | null>>;
   selectTodoById: (todoId: number) => void;
+  todoToDeleteId: number | null;
+  setTodoToDeleteId: React.Dispatch<React.SetStateAction<number | null>>;
   title: string;
   setTitle: React.Dispatch<React.SetStateAction<string>>;
   description: string;
   setDescription: React.Dispatch<React.SetStateAction<string>>;
   addNewTodoToList: (newTodo: ITodo) => void;
+  removeTodoFromList: (todoId: number) => void;
   cleanTodos: () => void;
   cleanCurrentTodo: () => void;
 };
@@ -22,6 +25,7 @@ export const TodosContext = createContext({} as TodosContextProps);
 export const TodosProvider = ({ children }: any) => {
   const [todos, setTodos] = useState<ITodo[]>([]);
   const [currentTodo, setCurrentTodo] = useState<ITodo | null>(null);
+  const [todoToDeleteId, setTodoToDeleteId] = useState<number | null>(null);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
@@ -32,6 +36,14 @@ export const TodosProvider = ({ children }: any) => {
   const addNewTodoToList = (newTodo: ITodo) => {
     setTodos([...todos, newTodo]);
     setCurrentTodo(newTodo);
+  };
+
+  const removeTodoFromList = (todoId: number) => {
+    if (todoId === null) return;
+
+    const newTodoList = todos.filter((el) => el.id !== todoId);
+
+    setTodos(newTodoList);
   };
 
   const cleanTodos = () => {
@@ -59,12 +71,15 @@ export const TodosProvider = ({ children }: any) => {
         setTodos,
         currentTodo,
         setCurrentTodo,
+        todoToDeleteId,
+        setTodoToDeleteId,
         selectTodoById,
         title,
         setTitle,
         description,
         setDescription,
         addNewTodoToList,
+        removeTodoFromList,
         cleanTodos,
         cleanCurrentTodo,
       }}

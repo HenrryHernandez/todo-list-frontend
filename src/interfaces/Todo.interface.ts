@@ -10,6 +10,11 @@ export interface In_CreateTodoResponse {
   todo: ITodo;
 }
 
+export interface In_DeleteTodoResponse {
+  ok: boolean;
+  msg: string;
+}
+
 export interface ITodo {
   id: number;
   title: string;
