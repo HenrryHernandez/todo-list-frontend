@@ -2,7 +2,13 @@ import { useEffect } from "react";
 
 import { axiosInstance } from "../api/apiInstance";
 
+import { ERROR_STRING } from "../utils/error-strings";
+
+import { useLogout } from "./useLogout";
+
 export const useAxios = () => {
+  const { logout } = useLogout();
+
   useEffect(() => {
     const requestInterceptor = axiosInstance.interceptors.request.use(
       (config: any) => {
@@ -28,7 +34,9 @@ export const useAxios = () => {
         const response = error?.response;
 
         if (response?.status === 401 || response?.status === 403) {
-          console.log("logout");
+          if (response?.data?.msg === ERROR_STRING.TOKEN_EXPIRED) {
+            logout();
+          }
         }
 
         config.__retryCount = config.__retryCount || 0;

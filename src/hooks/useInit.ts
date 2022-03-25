@@ -19,11 +19,13 @@ export const useInit = () => {
     const { errorMsg: userErrorMsg } = await getUser();
     if (userErrorMsg) {
       alert(userErrorMsg);
+      return;
     }
 
     const { errorMsg: todosErrorMsg } = await getTodos();
     if (todosErrorMsg) {
       alert(todosErrorMsg);
+      return;
     }
   };
 
