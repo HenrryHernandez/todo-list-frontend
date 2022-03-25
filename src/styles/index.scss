@@ -2,6 +2,8 @@
 //if in base we use something of settings
 //it won't work because of the order of the import
 
+@import "./abstracts/mixins";
+
 @import "./base/base";
 @import "./base/variables";
 @import "./base/general";
