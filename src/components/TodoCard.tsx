@@ -1,6 +1,7 @@
 import { useContext } from "react";
 
 import { TodosContext } from "../contexts/TodosContext";
+import { ModalContext } from "../contexts/ModalContext";
 
 interface Props {
   id: number;
@@ -9,7 +10,8 @@ interface Props {
 }
 
 export const TodoCard = ({ id, title, description }: Props) => {
-  const { selectTodoById } = useContext(TodosContext);
+  const { selectTodoById, setTodoToDeleteId } = useContext(TodosContext);
+  const { openDeleteTodoModal } = useContext(ModalContext);
 
   const getFormattedDescription = () => {
     const MAX_CHARACTERS_TO_SHOW = 50;
@@ -17,6 +19,11 @@ export const TodoCard = ({ id, title, description }: Props) => {
     if (description.length <= MAX_CHARACTERS_TO_SHOW) return description;
 
     return `${description.substring(0, MAX_CHARACTERS_TO_SHOW)}...`;
+  };
+
+  const initDeletionProcess = () => {
+    setTodoToDeleteId(id);
+    openDeleteTodoModal();
   };
 
   return (
@@ -34,7 +41,7 @@ export const TodoCard = ({ id, title, description }: Props) => {
           <p>{getFormattedDescription()}</p>
         </div>
         <div className="todo_card__button">
-          <button className="btn">
+          <button className="btn" onClick={initDeletionProcess}>
             <i className="fa fa-trash"></i>
           </button>
         </div>
