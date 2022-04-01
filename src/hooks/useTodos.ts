@@ -33,5 +33,21 @@ export const useTodos = () => {
     }
   };
 
-  return { postNewTodo, deleteTodoFromDB };
+  const updateTodoToDB = async (
+    todoId: number,
+    newInfo: Out_UpdateTodoInfo
+  ) => {
+    try {
+      const response = await axiosInstance.put<In_DeleteTodoResponse>(
+        `/api/todos/update/${todoId}`,
+        newInfo
+      );
+
+      return response.data;
+    } catch (error) {
+      return null;
+    }
+  };
+
+  return { postNewTodo, deleteTodoFromDB, updateTodoToDB };
 };

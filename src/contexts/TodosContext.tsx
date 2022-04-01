@@ -16,6 +16,7 @@ type TodosContextProps = {
   setDescription: React.Dispatch<React.SetStateAction<string>>;
   addNewTodoToList: (newTodo: ITodo) => void;
   removeTodoFromList: (todoId: number) => void;
+  updateTodoInList: () => void;
   cleanTodos: () => void;
   cleanCurrentTodo: () => void;
 };
@@ -42,6 +43,15 @@ export const TodosProvider = ({ children }: any) => {
     if (todoId === null) return;
 
     const newTodoList = todos.filter((el) => el.id !== todoId);
+
+    setTodos(newTodoList);
+  };
+
+  const updateTodoInList = () => {
+    const newTodoList = todos.map((el) => {
+      if (el.id === currentTodo?.id) return { ...el, title, description };
+      else return el;
+    });
 
     setTodos(newTodoList);
   };
@@ -80,6 +90,7 @@ export const TodosProvider = ({ children }: any) => {
         setDescription,
         addNewTodoToList,
         removeTodoFromList,
+        updateTodoInList,
         cleanTodos,
         cleanCurrentTodo,
       }}
