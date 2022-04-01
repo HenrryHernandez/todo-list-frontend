@@ -19,7 +19,7 @@ export const Dashboard = () => {
   const { postNewTodo } = useTodos();
 
   const createTodo = async () => {
-    const resp = await postNewTodo({ title: "", description: "" });
+    const resp = await postNewTodo();
 
     if (!resp) {
       alert("no posted todo.");

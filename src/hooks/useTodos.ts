@@ -3,17 +3,16 @@ import { useAxios } from "../hooks/useAxios";
 import {
   In_CreateTodoResponse,
   In_DeleteTodoResponse,
-  Out_CreateTodo,
+  Out_UpdateTodoInfo,
 } from "../interfaces/Todo.interface";
 
 export const useTodos = () => {
   const axiosInstance = useAxios();
 
-  const postNewTodo = async (newTodo: Out_CreateTodo) => {
+  const postNewTodo = async () => {
     try {
       const response = await axiosInstance.post<In_CreateTodoResponse>(
-        "/api/todos/create",
-        newTodo
+        "/api/todos/create"
       );
 
       return response.data;

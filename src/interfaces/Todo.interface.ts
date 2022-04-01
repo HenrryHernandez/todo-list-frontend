@@ -27,7 +27,7 @@ export interface IImage {
   imageName: string;
 }
 
-export interface Out_CreateTodo {
+export interface Out_UpdateTodoInfo {
   title: string;
   description: string;
 }
