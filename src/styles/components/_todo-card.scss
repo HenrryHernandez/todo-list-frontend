@@ -22,7 +22,7 @@
   height: 60%;
   display: flex;
   align-items: center;
-  padding: 5px;
+  padding: 4px 8px;
   background-color: lighten($primary-colorie, 40px);
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
@@ -36,7 +36,6 @@
   width: 80%;
   height: 100%;
   display: flex;
-  justify-content: center;
   align-items: center;
 }
 
