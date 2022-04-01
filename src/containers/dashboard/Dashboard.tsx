@@ -3,6 +3,7 @@ import { useContext, useEffect } from "react";
 import { CurrentTodoView } from "../../components/CurrentTodoView";
 import { DeleteTodoModal } from "../../components/DeleteTodoModal";
 import { TodoCard } from "../../components/TodoCard";
+import { OptionsMenu } from "../../components/OptionsMenu";
 
 import { TodosContext } from "../../contexts/TodosContext";
 import { UserContext } from "../../contexts/UserContext";
@@ -53,7 +54,9 @@ export const Dashboard = () => {
         <div className="dashboard__todo">
           <CurrentTodoView />
         </div>
-        <div className="dashboard__options">options</div>
+        <div className="dashboard__options">
+          <OptionsMenu />
+        </div>
       </div>
 
       {isDeleteTodoModalOpen ? <DeleteTodoModal /> : null}
