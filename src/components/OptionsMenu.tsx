@@ -11,7 +11,7 @@ export const OptionsMenu = () => {
     useContext(TodosContext);
   const { updateTodoToDB } = useTodos();
 
-  const [showEmojisPicker, setShowEmojisPicker] = useState(true);
+  const [showEmojisPicker, setShowEmojisPicker] = useState(false);
 
   const toggleEmojisPicker = () => {
     setShowEmojisPicker(!showEmojisPicker);
@@ -34,13 +34,13 @@ export const OptionsMenu = () => {
       <div className="options-menu__toolbar">
         {showEmojisPicker ? <EmojisPicker /> : null}
 
-        <button className="btn options-menu__button--tool">
-          <i className="fa-solid fa-face-smile"></i>
-        </button>
         <button
           className="btn options-menu__button--tool"
           onClick={toggleEmojisPicker}
         >
+          <i className="fa-solid fa-face-smile"></i>
+        </button>
+        <button className="btn options-menu__button--tool">
           <i className="fa-solid fa-images"></i>
         </button>
       </div>
