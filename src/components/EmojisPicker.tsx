@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+
+import { TodosContext } from "../contexts/TodosContext";
 
 import { emojiPicker } from "../utils/emojis-categories";
 
 export const EmojisPicker = () => {
+  const { setDescription } = useContext(TodosContext);
   const [categories, setCategories] = useState(emojiPicker);
 
   const selectCategory = (categoryId: string) => {
@@ -18,6 +21,10 @@ export const EmojisPicker = () => {
     });
 
     setCategories(newCategories);
+  };
+
+  const addEmojiToText = (emoji: string) => {
+    setDescription((description) => description + emoji);
   };
 
   return (
@@ -56,6 +63,9 @@ export const EmojisPicker = () => {
                     <button
                       key={uuidv4()}
                       className="emojis-picker__button--emoji"
+                      onClick={() => {
+                        addEmojiToText(emoji);
+                      }}
                     >
                       {emoji}
                     </button>
