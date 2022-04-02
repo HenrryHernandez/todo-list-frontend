@@ -1,0 +1,13 @@
+.loading {
+  @include columnCenter;
+
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  background-color: #0000009c;
+  z-index: 2000;
+
+  &__text {
+    color: #fff;
+  }
+}

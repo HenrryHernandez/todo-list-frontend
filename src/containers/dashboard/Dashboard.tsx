@@ -9,6 +9,7 @@ import { OptionsMenu } from "../../components/OptionsMenu";
 import { TodosContext } from "../../contexts/TodosContext";
 import { UserContext } from "../../contexts/UserContext";
 import { ModalContext } from "../../contexts/ModalContext";
+import { LoadingContext } from "../../contexts/LoadingContext";
 
 import { useTodos } from "../../hooks/useTodos";
 
@@ -16,10 +17,13 @@ export const Dashboard = () => {
   const { username } = useContext(UserContext);
   const { todos, addNewTodoToList, currentTodo } = useContext(TodosContext);
   const { isDeleteTodoModalOpen } = useContext(ModalContext);
+  const { setIsLoading } = useContext(LoadingContext);
 
   const { postNewTodo } = useTodos();
 
   const createTodo = async () => {
+    setIsLoading(true);
+
     const resp = await postNewTodo();
 
     if (!resp) {
@@ -27,6 +31,8 @@ export const Dashboard = () => {
     } else {
       addNewTodoToList(resp.todo);
     }
+
+    setIsLoading(false);
   };
 
   useEffect(() => {

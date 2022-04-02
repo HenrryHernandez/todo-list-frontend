@@ -8,9 +8,13 @@ import { PrivateRouter } from "./PrivateRouter";
 import { PublicRouter } from "./PublicRouter";
 
 import { TokenContext } from "../contexts/TokenContext";
+import { LoadingContext } from "../contexts/LoadingContext";
+
+import { Loading } from "../components/Loading";
 
 export const MainRouter = () => {
   const { token, setToken } = useContext(TokenContext);
+  const { isLoading } = useContext(LoadingContext);
 
   const [thereIsToken, setThereIsToken] = useState(false);
   const [confirmingToken, setConfirmingToken] = useState(true);
@@ -30,28 +34,32 @@ export const MainRouter = () => {
   if (confirmingToken) return <div>Loading...</div>;
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          element={<PrivateRouteValidator allowNavigation={thereIsToken} />}
-        >
-          <Route path="/*" element={<PrivateRouter />}></Route>
-        </Route>
-        <Route
-          element={<PublicRouteValidator allowNavigation={!thereIsToken} />}
-        >
-          <Route path="/auth/*" element={<PublicRouter />}></Route>
-        </Route>
+    <>
+      {isLoading ? <Loading /> : null}
 
-        <Route
-          path="*"
-          element={
-            <>
-              <p>Not found</p>
-            </>
-          }
-        />
-      </Routes>
-    </BrowserRouter>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            element={<PrivateRouteValidator allowNavigation={thereIsToken} />}
+          >
+            <Route path="/*" element={<PrivateRouter />}></Route>
+          </Route>
+          <Route
+            element={<PublicRouteValidator allowNavigation={!thereIsToken} />}
+          >
+            <Route path="/auth/*" element={<PublicRouter />}></Route>
+          </Route>
+
+          <Route
+            path="*"
+            element={
+              <>
+                <p>Not found</p>
+              </>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 };

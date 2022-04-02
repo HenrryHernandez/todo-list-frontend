@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import { EmojisPicker } from "./EmojisPicker";
 
 import { TodosContext } from "../contexts/TodosContext";
+import { LoadingContext } from "../contexts/LoadingContext";
 
 import { useTodos } from "../hooks/useTodos";
 
@@ -10,6 +11,7 @@ export const OptionsMenu = () => {
   const { currentTodo, title, description, updateTodoInList } =
     useContext(TodosContext);
   const { updateTodoToDB } = useTodos();
+  const { setIsLoading } = useContext(LoadingContext);
 
   const [showEmojisPicker, setShowEmojisPicker] = useState(false);
 
@@ -20,6 +22,8 @@ export const OptionsMenu = () => {
   const updateTodo = async () => {
     if (!currentTodo) return;
 
+    setIsLoading(true);
+
     const resp = await updateTodoToDB(currentTodo.id, { description, title });
 
     if (!resp) {
@@ -27,6 +31,8 @@ export const OptionsMenu = () => {
     } else {
       updateTodoInList();
     }
+
+    setIsLoading(false);
   };
 
   return (

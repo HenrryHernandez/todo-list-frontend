@@ -2,6 +2,7 @@ import { useContext } from "react";
 
 import { ModalContext } from "../contexts/ModalContext";
 import { TodosContext } from "../contexts/TodosContext";
+import { LoadingContext } from "../contexts/LoadingContext";
 
 import { useTodos } from "../hooks/useTodos";
 
@@ -9,6 +10,7 @@ export const DeleteTodoModal = () => {
   const { closeDeleteTodoModal } = useContext(ModalContext);
   const { todoToDeleteId, setTodoToDeleteId, removeTodoFromList } =
     useContext(TodosContext);
+  const { setIsLoading } = useContext(LoadingContext);
 
   const { deleteTodoFromDB } = useTodos();
 
@@ -20,6 +22,8 @@ export const DeleteTodoModal = () => {
   const deleteTodo = async () => {
     if (todoToDeleteId === null) return;
 
+    setIsLoading(true);
+
     const resp = await deleteTodoFromDB(todoToDeleteId);
 
     if (!resp) {
@@ -29,6 +33,8 @@ export const DeleteTodoModal = () => {
       setTodoToDeleteId(null);
       closeDeleteTodoModal();
     }
+
+    setIsLoading(false);
   };
 
   return (
