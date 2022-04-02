@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 import { EmojisPicker } from "./EmojisPicker";
 
@@ -10,6 +10,12 @@ export const OptionsMenu = () => {
   const { currentTodo, title, description, updateTodoInList } =
     useContext(TodosContext);
   const { updateTodoToDB } = useTodos();
+
+  const [showEmojisPicker, setShowEmojisPicker] = useState(true);
+
+  const toggleEmojisPicker = () => {
+    setShowEmojisPicker(!showEmojisPicker);
+  };
 
   const updateTodo = async () => {
     if (!currentTodo) return;
@@ -26,11 +32,15 @@ export const OptionsMenu = () => {
   return (
     <div className="options-menu">
       <div className="options-menu__toolbar">
-        <EmojisPicker />
+        {showEmojisPicker ? <EmojisPicker /> : null}
+
         <button className="btn options-menu__button--tool">
           <i className="fa-solid fa-face-smile"></i>
         </button>
-        <button className="btn options-menu__button--tool">
+        <button
+          className="btn options-menu__button--tool"
+          onClick={toggleEmojisPicker}
+        >
           <i className="fa-solid fa-images"></i>
         </button>
       </div>
