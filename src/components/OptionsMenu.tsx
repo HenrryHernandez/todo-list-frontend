@@ -1,5 +1,7 @@
 import { useContext } from "react";
 
+import { EmojisPicker } from "./EmojisPicker";
+
 import { TodosContext } from "../contexts/TodosContext";
 
 import { useTodos } from "../hooks/useTodos";
@@ -24,6 +26,7 @@ export const OptionsMenu = () => {
   return (
     <div className="options-menu">
       <div className="options-menu__toolbar">
+        <EmojisPicker />
         <button className="btn options-menu__button--tool">
           <i className="fa-solid fa-face-smile"></i>
         </button>

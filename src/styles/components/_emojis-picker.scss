@@ -1,0 +1,80 @@
+$light-grey: rgb(213, 213, 213);
+
+.emojis-picker {
+  min-width: 280px;
+  height: 200px;
+  position: absolute;
+  left: 42px;
+  top: -202px;
+  border-radius: 2px;
+  box-shadow: 0px 0px 8px 1px darken($light-grey, 20px);
+
+  &__categories {
+    width: 100%;
+    height: 35px;
+    display: flex;
+    background-color: $light-grey;
+  }
+
+  &__searcher {
+    width: 100%;
+    height: 25px;
+  }
+
+  &__emojis {
+    height: 140px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(25px, 1fr));
+    grid-template-rows: repeat(auto-fill, 25px);
+    overflow: scroll;
+  }
+
+  &__button {
+    &--category {
+      @include rowCenter;
+
+      min-width: 40px;
+      width: 100%;
+      height: 100%;
+      border-radius: 2px;
+      background-color: transparent;
+      color: #000;
+
+      &:hover {
+        background-color: lighten($calm-blue, 30px);
+      }
+
+      &:active {
+        background-color: lighten($calm-blue, 25px);
+      }
+    }
+
+    &--emoji {
+      height: 25px;
+      border-width: 0;
+      background-color: lighten($light-grey, 10px);
+
+      &:hover {
+        background-color: $light-grey;
+        cursor: pointer;
+      }
+
+      &:active {
+        background-color: lighten($light-grey, 5px);
+      }
+    }
+  }
+
+  &__input {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 0 4px;
+    border-width: 0px;
+    background-color: darken($light-grey, 10px);
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
