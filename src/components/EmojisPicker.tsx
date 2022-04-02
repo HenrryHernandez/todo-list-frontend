@@ -1,28 +1,41 @@
+import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+
+import { emojiPicker } from "../utils/emojis-categories";
+
 export const EmojisPicker = () => {
+  const [categories, setCategories] = useState(emojiPicker);
+
+  const selectCategory = (categoryId: string) => {
+    const newCategories = categories.map((category) => {
+      if (category.id === categoryId) {
+        category.selected = true;
+      } else {
+        category.selected = false;
+      }
+
+      return category;
+    });
+
+    setCategories(newCategories);
+  };
+
   return (
     <div className="emojis-picker">
       <div className="emojis-picker__categories">
-        <button className="btn emojis-picker__button--category">
-          <i className="fa-solid fa-face-smile"></i>
-        </button>
-        <button className="btn emojis-picker__button--category">
-          <i className="fa-solid fa-leaf"></i>
-        </button>
-        <button className="btn emojis-picker__button--category">
-          <i className="fa-solid fa-utensils"></i>
-        </button>
-        <button className="btn emojis-picker__button--category">
-          <i className="fa-solid fa-futbol"></i>
-        </button>
-        <button className="btn emojis-picker__button--category">
-          <i className="fa-solid fa-earth-americas"></i>
-        </button>
-        <button className="btn emojis-picker__button--category">
-          <i className="fa-solid fa-lightbulb"></i>
-        </button>
-        <button className="btn emojis-picker__button--category">
-          <i className="fa-solid fa-flag"></i>
-        </button>
+        {categories.map((category) => {
+          return (
+            <button
+              key={category.id}
+              className="btn emojis-picker__button--category"
+              onClick={() => {
+                selectCategory(category.id);
+              }}
+            >
+              <i className={category.icon}></i>
+            </button>
+          );
+        })}
       </div>
 
       <div className="emojis-picker__searcher">
@@ -33,12 +46,24 @@ export const EmojisPicker = () => {
         />
       </div>
 
-      <div className="emojis-picker__emojis">
-        <button className="emojis-picker__button--emoji">😀</button>
-        <button className="emojis-picker__button--emoji">😀</button>
-        <button className="emojis-picker__button--emoji">😀</button>
-        <button className="emojis-picker__button--emoji">😀</button>
-        <button className="emojis-picker__button--emoji">😀</button>
+      <div>
+        {categories.map((category) => {
+          if (category.selected)
+            return (
+              <div key={uuidv4()} className="emojis-picker__emojis">
+                {category.emojis.map((emoji) => {
+                  return (
+                    <button
+                      key={uuidv4()}
+                      className="emojis-picker__button--emoji"
+                    >
+                      {emoji}
+                    </button>
+                  );
+                })}
+              </div>
+            );
+        })}
       </div>
     </div>
   );
