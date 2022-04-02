@@ -6,7 +6,8 @@ import { TodosContext } from "../contexts/TodosContext";
 import { emojiPicker } from "../utils/emojis-categories";
 
 export const EmojisPicker = () => {
-  const { setDescription } = useContext(TodosContext);
+  const { currentTodo, setDescription } = useContext(TodosContext);
+
   const [categories, setCategories] = useState(emojiPicker);
 
   const selectCategory = (categoryId: string) => {
@@ -24,6 +25,8 @@ export const EmojisPicker = () => {
   };
 
   const addEmojiToText = (emoji: string) => {
+    if (!currentTodo) return;
+
     setDescription((description) => description + emoji);
   };
 
