@@ -1,5 +1,6 @@
 import { useContext, useEffect } from "react";
 
+import { AddNewTodo } from "../../components/AddNewTodo";
 import { CurrentTodoView } from "../../components/CurrentTodoView";
 import { DeleteTodoModal } from "../../components/DeleteTodoModal";
 import { TodoCard } from "../../components/TodoCard";
@@ -13,7 +14,7 @@ import { useTodos } from "../../hooks/useTodos";
 
 export const Dashboard = () => {
   const { username } = useContext(UserContext);
-  const { todos, addNewTodoToList } = useContext(TodosContext);
+  const { todos, addNewTodoToList, currentTodo } = useContext(TodosContext);
   const { isDeleteTodoModalOpen } = useContext(ModalContext);
 
   const { postNewTodo } = useTodos();
@@ -52,7 +53,11 @@ export const Dashboard = () => {
           ))}
         </div>
         <div className="dashboard__todo">
-          <CurrentTodoView />
+          {currentTodo ? (
+            <CurrentTodoView />
+          ) : (
+            <AddNewTodo createTodo={createTodo} />
+          )}
         </div>
         <div className="dashboard__options">
           <OptionsMenu />
