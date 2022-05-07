@@ -38,6 +38,8 @@ export const OptionsMenu = () => {
   };
 
   const selectImage = () => {
+    if (!currentTodo) return;
+
     currRef.current?.click();
   };
 
