@@ -7,6 +7,8 @@ type TodosContextProps = {
   setTodos: React.Dispatch<React.SetStateAction<ITodo[]>>;
   currentTodo: ITodo | null;
   setCurrentTodo: React.Dispatch<React.SetStateAction<ITodo | null>>;
+  currentTodoNewImages: File[];
+  appendNewImage: (newImage: File) => void;
   selectTodoById: (todoId: number) => void;
   todoToDeleteId: number | null;
   setTodoToDeleteId: React.Dispatch<React.SetStateAction<number | null>>;
@@ -26,12 +28,14 @@ export const TodosContext = createContext({} as TodosContextProps);
 export const TodosProvider = ({ children }: any) => {
   const [todos, setTodos] = useState<ITodo[]>([]);
   const [currentTodo, setCurrentTodo] = useState<ITodo | null>(null);
+  const [currentTodoNewImages, setCurrentTodoNewImages] = useState<File[]>([]);
   const [todoToDeleteId, setTodoToDeleteId] = useState<number | null>(null);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
   const selectTodoById = (todoId: number) => {
     setCurrentTodo(todos.find((el) => el.id === todoId) ?? null);
+    cleanNewImagesArray();
   };
 
   const addNewTodoToList = (newTodo: ITodo) => {
@@ -45,6 +49,14 @@ export const TodosProvider = ({ children }: any) => {
     const newTodoList = todos.filter((el) => el.id !== todoId);
 
     setTodos(newTodoList);
+  };
+
+  const appendNewImage = (newImage: File) => {
+    setCurrentTodoNewImages([...currentTodoNewImages, newImage]);
+  };
+
+  const cleanNewImagesArray = () => {
+    setCurrentTodoNewImages([]);
   };
 
   const updateTodoInList = () => {
@@ -80,6 +92,8 @@ export const TodosProvider = ({ children }: any) => {
         todos,
         setTodos,
         currentTodo,
+        currentTodoNewImages,
+        appendNewImage,
         setCurrentTodo,
         todoToDeleteId,
         setTodoToDeleteId,

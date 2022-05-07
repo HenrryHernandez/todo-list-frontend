@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 
 import { EmojisPicker } from "./EmojisPicker";
 
@@ -8,12 +8,14 @@ import { LoadingContext } from "../contexts/LoadingContext";
 import { useTodos } from "../hooks/useTodos";
 
 export const OptionsMenu = () => {
-  const { currentTodo, title, description, updateTodoInList } =
+  const { currentTodo, title, description, updateTodoInList, appendNewImage } =
     useContext(TodosContext);
-  const { updateTodoToDB } = useTodos();
   const { setIsLoading } = useContext(LoadingContext);
 
+  const { updateTodoToDB } = useTodos();
+
   const [showEmojisPicker, setShowEmojisPicker] = useState(false);
+  const currRef = useRef<HTMLInputElement>(null);
 
   const toggleEmojisPicker = () => {
     setShowEmojisPicker(!showEmojisPicker);
@@ -35,6 +37,17 @@ export const OptionsMenu = () => {
     setIsLoading(false);
   };
 
+  const selectImage = () => {
+    currRef.current?.click();
+    console.log(currRef.current);
+  };
+
+  const getImage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files === null) return;
+
+    appendNewImage(e.target.files[0]);
+  };
+
   return (
     <div className="options-menu">
       <div className="options-menu__toolbar">
@@ -46,9 +59,18 @@ export const OptionsMenu = () => {
         >
           <i className="fa-solid fa-face-smile"></i>
         </button>
-        <button className="btn options-menu__button--tool">
+        <button
+          className="btn options-menu__button--tool"
+          onClick={selectImage}
+        >
           <i className="fa-solid fa-images"></i>
         </button>
+        <input
+          id="images"
+          type="file"
+          ref={currRef}
+          onChange={(e) => getImage(e)}
+        />
       </div>
       <div className="options-menu__options">
         <button className="btn options-menu__button--save" onClick={updateTodo}>
