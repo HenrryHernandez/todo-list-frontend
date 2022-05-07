@@ -15,7 +15,6 @@ export const useInit = () => {
   const axiosInstance = useAxios();
 
   const init = async () => {
-    console.log("initiating...");
     const { errorMsg: userErrorMsg } = await getUser();
     if (userErrorMsg) {
       alert(userErrorMsg);

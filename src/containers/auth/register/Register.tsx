@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 export const Register = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
-
-    console.log("submitting...");
   };
 
   return (

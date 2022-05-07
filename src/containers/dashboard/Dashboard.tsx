@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 
 import { AddNewTodo } from "../../components/AddNewTodo";
 import { CurrentTodoView } from "../../components/CurrentTodoView";
@@ -34,10 +34,6 @@ export const Dashboard = () => {
 
     setIsLoading(false);
   };
-
-  useEffect(() => {
-    console.log(isDeleteTodoModalOpen);
-  }, [isDeleteTodoModalOpen]);
 
   return (
     <>

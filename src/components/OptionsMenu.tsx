@@ -39,7 +39,6 @@ export const OptionsMenu = () => {
 
   const selectImage = () => {
     currRef.current?.click();
-    console.log(currRef.current);
   };
 
   const getImage = (e: React.ChangeEvent<HTMLInputElement>) => {
