@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 
-import { ITodo } from "../interfaces/Todo.interface";
+import { IImage, ITodo } from "../interfaces/Todo.interface";
 
 type TodosContextProps = {
   todos: ITodo[];
@@ -17,10 +17,12 @@ type TodosContextProps = {
   description: string;
   setDescription: React.Dispatch<React.SetStateAction<string>>;
   addNewTodoToList: (newTodo: ITodo) => void;
+  addNewImagesToTodo: (todoId: number, newImages: IImage[]) => void;
   removeTodoFromList: (todoId: number) => void;
   updateTodoInList: () => void;
   cleanTodos: () => void;
   cleanCurrentTodo: () => void;
+  cleanNewImagesArray: () => void;
 };
 
 export const TodosContext = createContext({} as TodosContextProps);
@@ -41,6 +43,16 @@ export const TodosProvider = ({ children }: any) => {
   const addNewTodoToList = (newTodo: ITodo) => {
     setTodos([...todos, newTodo]);
     setCurrentTodo(newTodo);
+  };
+
+  const addNewImagesToTodo = (todoId: number, newImages: IImage[]) => {
+    const newTodos = todos.map((todo) =>
+      todo.id === todoId
+        ? { ...todo, images: [...todo.images, ...newImages] }
+        : todo
+    );
+
+    setTodos(newTodos);
   };
 
   const removeTodoFromList = (todoId: number) => {
@@ -103,10 +115,12 @@ export const TodosProvider = ({ children }: any) => {
         description,
         setDescription,
         addNewTodoToList,
+        addNewImagesToTodo,
         removeTodoFromList,
         updateTodoInList,
         cleanTodos,
         cleanCurrentTodo,
+        cleanNewImagesArray,
       }}
     >
       {children}

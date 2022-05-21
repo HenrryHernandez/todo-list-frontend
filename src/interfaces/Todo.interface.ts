@@ -23,6 +23,8 @@ export interface ITodo {
 }
 
 export interface IImage {
+  ok?: boolean;
+  msg?: string;
   id: number;
   imageName: string;
 }
