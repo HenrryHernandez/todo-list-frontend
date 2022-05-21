@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useCallback, useContext, useEffect } from "react";
 
 import { TodosContext } from "../contexts/TodosContext";
 
@@ -12,11 +12,7 @@ export const CurrentTodoView = () => {
     currentTodoNewImages,
   } = useContext(TodosContext);
 
-  useEffect(() => {
-    displayImages();
-  }, [currentTodoNewImages]);
-
-  const displayImages = () => {
+  const displayImages = useCallback(() => {
     const files = currentTodoNewImages;
     const div = document.querySelector("#new-images");
     if (!div) return;
@@ -36,7 +32,11 @@ export const CurrentTodoView = () => {
 
       fileReader.readAsDataURL(file);
     });
-  };
+  }, [currentTodoNewImages]);
+
+  useEffect(() => {
+    displayImages();
+  }, [displayImages]);
 
   return (
     <div className="current_todo_view">
